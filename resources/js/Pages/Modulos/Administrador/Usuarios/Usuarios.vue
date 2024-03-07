@@ -33,7 +33,7 @@
                     <span @click="SeleccionarCampo('name','Nombre')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-slate-500 dark:text-gray-200">Nombre</span>
                 </div>
                 <div class="py-1 dark:bg-slate-700 dark:hover:bg-slate-500 " role="menuitem" tabindex="-1" id="dropdown-menu-item-2" href="#">
-                    <span @click="SeleccionarCampo('email','Email')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-slate-500 dark:text-gray-200">Email</span>
+                    <span @click="SeleccionarCampo('email','Correo')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-slate-500 dark:text-gray-200">Correo</span>
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
 
                                         <div class="w-full md:w-1/2 px-3">
                                             <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-last-name">
-                                                email
+                                                Correo
                                             </label>
                                             <input id="email" v-model="NuevoUsuario.email" class="appearance-none block w-full bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"   type="email" placeholder="email" required>
                                         </div>
@@ -168,9 +168,8 @@
                         Nombre del usuario
                     </th>
                     <th class="border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
-                        Email
+                        Correo
                     </th>
-
                     <th class="border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
                         Estatus de la cuenta
                     </th>
@@ -253,7 +252,7 @@
                                             <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                             </svg>
-                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Esta seguro de eliminar al usuario: {{ nameBorrarSeleccionado }} </h3>
+                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Está seguro de eliminar al usuario: {{ nameBorrarSeleccionado }} </h3>
                                             <Link @click="hideDelete" method="delete" :href="route('Users.destroy', idBorrarSeleccionado)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                                 Si, estoy seguro
                                             </Link>
@@ -430,6 +429,7 @@
                         const response=await this.$inertia.post(route('Users.store'),this.NuevoUsuario)
                         this.hideElement()
                     }catch (error) {
+                        console.log(response.data);
                         console.error(error); // Imprimir el error en la consola.
                     }
                 }
@@ -458,7 +458,6 @@
         }
     };
 </script>
-
 
 <style>
     .tippy-box[data-theme~='MiThemeBlue'] {

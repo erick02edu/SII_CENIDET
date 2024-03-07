@@ -15,6 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idMateria')->nullable();
             $table->float('Calificacion');
             $table->float('NumSemestre');
+            $table->date('FechaRegistro');
             $table->unsignedBigInteger('idProfesor')->nullable();
             $table->unsignedBigInteger('idGrupo')->nullable(); // Columna para la llave foránea
 

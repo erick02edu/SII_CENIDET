@@ -26,24 +26,22 @@ class horariosDocentesController extends Controller
         $this->middleware(['role:Recursos Humanos'])->only('store','edit');
         $this->middleware(['role:Recursos Humanos'])->only('destroy');
     }
-    //Funcion index que redirige a la vista de horarios
+    /*
+    Funcion index que redirige a la vista con la lista de horarios
+    */
     public function index(){
-
         $Pagination=horariosDocentes::paginate(5);
         $ListaHorarios=$Pagination->items();
         $ListaProfesores=app(PersonalController::class)->ObtenerPersonal();
         $ListaPeriodos=app(PeriodoController::class)->ObtenerPeriodos();
         $ListaaDepartamentos=app(DepartamentoController::class)->ObtenerDepartamentos();
-
         $ListaUrl=[];
-
+        //Generar urls para iframe en la vista
         foreach ($ListaHorarios as $horario) {
             $idHorario=$horario->id;
             $url="/HorariosDocentes/$idHorario/ver";
-            //$url="/formatoPDF/$idHorario";
             array_push($ListaUrl, $url);
         }
-
         // Obtener datos flash de la sesión
         $mensaje = Session::get('mensaje');
         $TipoMensaje = Session::get('TipoMensaje');
@@ -59,7 +57,10 @@ class horariosDocentesController extends Controller
             'tipoMensaje' => $TipoMensaje,
         ]);
     }
-    //Funcion que registra un nuevo horario
+    /*Funcion que permite la creacion de un nuevo horario
+    Parametros recibidos
+        1. Informacion necesaria para la creacion de un nuevo horario
+    */
     public function store(Request $request){
         $HorarioDoc=new horariosDocentes();
         $HorarioDoc->idProfesor=$request->idProfesor;
@@ -67,9 +68,10 @@ class horariosDocentesController extends Controller
         $HorarioDoc->save();
         $newHorarioId = $HorarioDoc->id;
         $InfoHorario=horariosDocentes::find($newHorarioId);
-        return redirect()->route('HorariosDocentes.editAdmin',$newHorarioId);
+        return redirect()->route('HorariosDocentes.edit',$newHorarioId);
     }
     //Funcion que retorna al Panel de horario de un docente
+    //Parametros recibido: id del horario
     public function edit(String $id){
         $InfoHorario=horariosDocentes::find($id);
 
@@ -106,6 +108,7 @@ class horariosDocentesController extends Controller
         ]);
     }
     //Funcion que retorna al Panel de horario de un administrativo
+    //Parametros recibido: id del horario
     public function editAdministrativo(String $id){
 
         $InfoHorario=horariosDocentes::find($id);
@@ -255,7 +258,8 @@ class horariosDocentesController extends Controller
             'MinutosSemana'=>$total_minutos
         ]);
     }
-    //Funcion para eliminar un horario
+    //Funcion que permiteeliminar un horario
+     //Parametros recibido: id del horario a eliminar
     public function destroy(String $id){
         try{
             $Horario = horariosDocentes::find($id);
@@ -269,7 +273,8 @@ class horariosDocentesController extends Controller
             return Redirect::route('HorariosDocentes.index');
         }
     }
-    //Funcion que redirige a la ruta para ver un horario
+    //Funcion que redirige a la vista que permite visualizar un horario
+     //Parametros recibido: id del horario
     public function ver(String $id){
         $Horario=horariosDocentes::find($id);
         if($Horario==null){
@@ -456,6 +461,9 @@ class horariosDocentesController extends Controller
             // 'ClasesViernes'=>$ClasesViernes,
         ]);
     }
+    /*Funcion que permite obtener la informacion del horario necesaria para despues redirigir a
+    vista que se encargara de crear horario en formato PDF
+    Parametros recibidos: id del horario */
     public function FormatoPDF(String $id){
 
         $Horario=horariosDocentes::find($id);
@@ -647,8 +655,10 @@ class horariosDocentesController extends Controller
             'MinutosSemana'=>$total_minutos
         ]);
     }
+    /*Funcion que permite obtener la informacion necesaria de una lista de horarios de un determindado periodo
+    para despues redirigir a vista que se encargara de crear los diferentes horarios en formato PDF
+    Parametros recibidos: id del Periodo */
     function HorarioConcentrado(String $idPeriodo){
-
         //Obtener todos los horarios de los docentes en el periodo seleccionado
         $ListaHorarios=horariosDocentes::where('idPeriodo',$idPeriodo)->get();
         $numeroDeHorarios = $ListaHorarios->count();
@@ -971,18 +981,24 @@ class horariosDocentesController extends Controller
 
         ]);
     }
+    /*Funcion que se encarga de buscar uno o varios horario por diferentes metodos
+    (Personal al que pertenece, periodo que se aplica el horario, departamentos al que pertenece el horario)
+    Parametros recibidos:
+    1. Personal al que pertenece el horario
+    2. Periodo del horario
+    3. Departamento al que pertenece al horario
+    Informacion devuelta
+    1.Lista de horarios que se encontraron en la busqueda
+    */
     public function buscarHorario(Request $request){
-
-        //$departamento = $request->input('departamentoBuscar');
         $Personal=$request->input('PersonalBuscar');
         $Periodo=$request->input('periodoBuscar');
         $Departamento=$request->input('departamentoBuscar');
-
         if($Personal==0 && $Periodo==0 && $Departamento==0){
             $Horarios=[];
         }
         else if($Personal==0 && $Periodo==0){
-                                                //Tabla unir  --Especificar llaves foraneas con que se une
+            //Tabla unir  --Especificar llaves foraneas con que se une
             $Horarios = horariosDocentes::join('personal', 'horarios_docentes.idProfesor', '=', 'personal.id')
             ->where('personal.idDepAdscripcion', '=', $Departamento) //Busqueda dentro de la tabla que se unio
             ->get();
@@ -998,8 +1014,12 @@ class horariosDocentesController extends Controller
             where('idPeriodo','=',$Periodo)->get();
         }
         return $Horarios;
-
     }
+    /*Funcion que permite enviar un correo al personal de la correcta realizacion de su horario
+    Parametros recibidos:
+    1. id del personal al que pertenece el horario
+    2. id del periodo al que pertenece el horario
+    */
     public function CorreoHorario(Request $request){
         $idProfesor=$request->input('profesor');
         $idPeriodo=$request->input('periodo');
@@ -1007,7 +1027,6 @@ class horariosDocentesController extends Controller
         $Periodo=app(PeriodoController::class)->ObtenerPeriodoPorID($idPeriodo);
         $Personal=$Personal->toArray();
         $Periodo=$Periodo->toArray();
-
         //Verificar si tiene una cuenta a la cual enviar el correo
         if($Personal['idUsuario']!=null){
             $Cuenta=app(UserController::class)->ObtenerUsuarioPorID($Personal['idUsuario']);

@@ -2,7 +2,7 @@
     <Head title="Backup" />
     <AuthenticatedLayout>
     <template #header>
-            Respaldo y restauracion de la base de datos
+            Respaldo y restauración de la base de datos
     </template>
 
 
@@ -274,6 +274,6 @@ export default {
         border-radius: 4px;
     }
     .tippy-arrow {
-        border-top-color: rgb(38, 95, 230); 
+        border-top-color: rgb(38, 95, 230);
     }
 </style>

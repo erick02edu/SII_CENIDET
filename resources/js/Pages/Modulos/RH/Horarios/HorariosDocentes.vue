@@ -203,7 +203,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Capa oscura -->
         <div :class="{ hidden: !isVisibleCorreo }" class="fixed inset-0 bg-black opacity-50">
         </div>
@@ -307,207 +306,198 @@
 
         <!--TABLA DE HORARIOS-->
         <div class="inline-block min-w-full overflow-hidden shadow">
-                <table class="w-full whitespace-no-wrap">
-                    <!--Encabezados-->
-                    <thead>
-                        <tr class="border-b-10 bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 mb-10" >
-                            <th class="border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
-                                Horario
-                            </th>
-                            <th class="border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
-                                Detalles
-                            </th>
-                        </tr>
-                    </thead>
-                    <!--FILAS-->
-                    <tbody>
-                        <tr v-for="(horario,index) in horarios" class="text-gray-700">
-                            <td class="border-b border-t-8 border-gray-200 dark:border-slate-700  bg-white dark:bg-slate-800 px-2 py-2 text-sm h-64 w-2/3">
-                                <iframe
-                                    :src="Urls[index]"
-                                    frameborder="0"
-                                    style="border:0"
-                                    class=" overflow-y-auto overflow-x-auto  w-full h-full "
-                                ></iframe>
-                            </td>
+            <table class="w-full whitespace-no-wrap">
+                <!--Encabezados-->
+                <thead>
+                    <tr class="border-b-10 bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 mb-10" >
+                        <th class="border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
+                            Horario
+                        </th>
+                        <th class="border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
+                            Detalles
+                        </th>
+                    </tr>
+                </thead>
+                <!--FILAS-->
+                <tbody>
+                    <tr v-for="(horario,index) in horarios" class="text-gray-700">
+                        <td class="border-b border-t-8 border-gray-200 dark:border-slate-700  bg-white dark:bg-slate-800 px-2 py-2 text-sm h-64 w-2/3">
+                            <iframe
+                                :src="Urls[index]"
+                                frameborder="0"
+                                style="border:0"
+                                class=" overflow-y-auto overflow-x-auto  w-full h-full "
+                            ></iframe>
+                        </td>
 
-                            <td class="border-b border-t-8 border-gray-200 dark:border-slate-700  bg-white dark:bg-slate-800 px-5 py-5 text-sm">
-                                <div class="dark:text-gray-200 p-3">
-                                    <p class="uppercase">Información del horario:</p>
-                                    <div v-for="(profesor,index) in profesores">
-                                        <p class="text-gray-900 dark:text-gray-200 whitespace-no-wrap" v-if="profesor.id==horario.idProfesor">
-                                        <p v-for="departamento in departamentos">
-                                                <p v-if="profesor.idDepAdscripcion==departamento.id">
-                                                <strong>Departamentos</strong><br>{{departamento.Nombre}}
-                                                </p>
+                        <td class="border-b border-t-8 border-gray-200 dark:border-slate-700  bg-white dark:bg-slate-800 px-5 py-5 text-sm">
+                            <div class="dark:text-gray-200 p-3">
+                                <p class="uppercase">Información del horario:</p>
+                                <div v-for="(profesor,index) in profesores">
+                                    <p class="text-gray-900 dark:text-gray-200 whitespace-no-wrap" v-if="profesor.id==horario.idProfesor">
+                                    <p v-for="departamento in departamentos">
+                                            <p v-if="profesor.idDepAdscripcion==departamento.id">
+                                            <strong>Departamentos</strong><br>{{departamento.Nombre}}
                                             </p>
                                         </p>
-                                    </div>
-
-                                    <div v-for="(profesor,index) in profesores">
-                                        <p class="text-gray-900 dark:text-gray-200 whitespace-no-wrap" v-if="profesor.id==horario.idProfesor">
-                                        <strong> Profesor:</strong>{{ profesor.Nombre }} {{ profesor.ApellidoP }} {{ profesor.ApellidoM }}
-                                        </p>
-                                    </div>
-
-                                    <div v-for="periodo in periodos">
-                                        <p class="text-gray-900 dark:text-gray-200 whitespace-no-wrap"
-                                        v-if="horario.idPeriodo==periodo.id"
-                                        >
-                                        <strong>Periodo:</strong>
-                                        {{ periodo.mesInicio }}/{{ periodo.AñoInicio }}-{{ periodo.mesTermino }}/{{ periodo.AñoTermino }}
-                                        </p>
-                                    </div>
+                                    </p>
                                 </div>
 
-                                <div class="mt-1 dark:text-gray-200">
+                                <div v-for="(profesor,index) in profesores">
+                                    <p class="text-gray-900 dark:text-gray-200 whitespace-no-wrap" v-if="profesor.id==horario.idProfesor">
+                                    <strong> Profesor:</strong>{{ profesor.Nombre }} {{ profesor.ApellidoP }} {{ profesor.ApellidoM }}
+                                    </p>
+                                </div>
 
-                                    <p class="mb-2 pl-3">Acciones:</p>
-
-                                    <Link :href="route('HorariosDocentes.edit',horario.id)"  class="p-3 rounded-md bg-[#b43838] mx-2 inline-flex mb-1 text-white"
-                                    v-if="$page.props.user.roles.includes('Recursos Humanos')"
-                                    v-tippy="{
-                                        content:'Editar horario de docente',
-                                        placement: 'left',
-                                        arrow: true,
-                                        arrowType: 'MyArrow',
-                                        theme: 'MiThemeRed'
-                                    }">
-                                        <i class="fa-solid fa-user-pen"></i>
-                                    </Link>
-
-                                    <Link :href="route('HorariosDocentes.editAdmin',horario.id)"  class="p-3 rounded-md bg-[#128201] mx-2 inline-flex mb-1 text-white"
-                                    v-if="$page.props.user.roles.includes('Recursos Humanos')"
-                                    v-tippy="{
-                                        content:'Editar horario administrativo',
-                                        placement: 'top',
-                                        arrow: true,
-                                        arrowType: 'MyArrow',
-                                        theme: 'MiThemeGreen'
-                                    }">
-                                        <i class="fa-solid fa-marker"></i>
-                                    </Link>
-
-
-                                    <a type="button"  @click="showDelete(horario.id)" class="p-3 rounded-md bg-[#dc2626] mx-2 inline-flex mb-1"
-                                    v-if="$page.props.user.roles.includes('Recursos Humanos')"
-                                    v-tippy="{
-                                        content:'Eliminar horario',
-                                        placement: 'top' ,
-                                        arrow: true,
-                                        theme: 'MiThemeRed'
-                                    }">
-                                        <i class="fa-solid fa-trash text-white"></i>
-                                    </a>
-
-
-                                    <a :href="route('HorariosDocentes.ver',horario.id)"  target="_blank" class="p-3 rounded-md bg-[#95c73e] mx-2 inline-flex mb-1"
-                                    v-if="$page.props.user.roles.includes('Recursos Humanos')"
-                                    v-tippy="{
-                                        content:'Ver Horario',
-                                        placement: 'top' ,
-                                        arrow: true,
-                                        theme: 'MiThemeYellow'
-                                    }"
+                                <div v-for="periodo in periodos">
+                                    <p class="text-gray-900 dark:text-gray-200 whitespace-no-wrap"
+                                    v-if="horario.idPeriodo==periodo.id"
                                     >
-                                        <i class="fa-solid fa-eye text-white"></i>
-                                    </a>
+                                    <strong>Periodo:</strong>
+                                    {{ periodo.mesInicio }}/{{ periodo.AñoInicio }}-{{ periodo.mesTermino }}/{{ periodo.AñoTermino }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="mt-1 dark:text-gray-200">
+
+                                <p class="mb-2 pl-3">Acciones:</p>
+
+                                <Link :href="route('HorariosDocentes.edit',horario.id)"  class="p-3 rounded-md bg-[#b43838] mx-2 inline-flex mb-1 text-white"
+                                v-if="$page.props.user.roles.includes('Recursos Humanos')"
+                                v-tippy="{
+                                    content:'Editar horario de docente',
+                                    placement: 'left',
+                                    arrow: true,
+                                    arrowType: 'MyArrow',
+                                    theme: 'MiThemeRed'
+                                }">
+                                    <i class="fa-solid fa-user-pen"></i>
+                                </Link>
+
+                                <Link :href="route('HorariosDocentes.editAdmin',horario.id)"  class="p-3 rounded-md bg-[#128201] mx-2 inline-flex mb-1 text-white"
+                                v-if="$page.props.user.roles.includes('Recursos Humanos')"
+                                v-tippy="{
+                                    content:'Editar horario administrativo',
+                                    placement: 'top',
+                                    arrow: true,
+                                    arrowType: 'MyArrow',
+                                    theme: 'MiThemeGreen'
+                                }">
+                                    <i class="fa-solid fa-marker"></i>
+                                </Link>
 
 
-                                    <!--DESCARGAR PDF-->
-                                    <a v-if="$page.props.user.roles.includes('Recursos Humanos')"  :href="route('HorarioPDF',horario.id)" target="_blank" class="p-3 rounded-md bg-[#dc2626] mx-2 inline-flex mb-1"
+                                <a type="button"  @click="showDelete(horario.id)" class="p-3 rounded-md bg-[#dc2626] mx-2 inline-flex mb-1"
+                                v-if="$page.props.user.roles.includes('Recursos Humanos')"
+                                v-tippy="{
+                                    content:'Eliminar horario',
+                                    placement: 'top' ,
+                                    arrow: true,
+                                    theme: 'MiThemeRed'
+                                }">
+                                    <i class="fa-solid fa-trash text-white"></i>
+                                </a>
+
+
+                                <a :href="route('HorariosDocentes.ver',horario.id)"  target="_blank" class="p-3 rounded-md bg-[#95c73e] mx-2 inline-flex mb-1"
+                                v-if="$page.props.user.roles.includes('Recursos Humanos')"
+                                v-tippy="{
+                                    content:'Ver Horario',
+                                    placement: 'top' ,
+                                    arrow: true,
+                                    theme: 'MiThemeYellow'
+                                }"
+                                >
+                                    <i class="fa-solid fa-eye text-white"></i>
+                                </a>
+
+
+                                <!--DESCARGAR PDF-->
+                                <a v-if="$page.props.user.roles.includes('Recursos Humanos')"  :href="route('HorarioPDF',horario.id)" target="_blank" class="p-3 rounded-md bg-[#dc2626] mx-2 inline-flex mb-1"
+                                v-tippy="{
+                                    content:'Descargar horario',
+                                    placement: 'top' ,
+                                    arrow: true,
+                                    theme: 'MiThemeRed'
+                                }">
+                                    <i class="fa-regular fa-file-pdf text-white"
+                                    ></i>
+                                </a>
+
+
+                                <span v-for="(profesor,index) in profesores">
+                                    <a type="button"  @click="showEnviar(profesor,horario.idProfesor)" class="p-3 rounded-md bg-[#dc2626] mx-2 inline-flex mb-1 mt-2"
+                                    v-if="$page.props.user.roles.includes('Recursos Humanos') && profesor.id==horario.idProfesor"
                                     v-tippy="{
-                                        content:'Descargar horario',
-                                        placement: 'top' ,
+                                        content:'Notificar a profesor',
+                                        placement: 'left' ,
                                         arrow: true,
                                         theme: 'MiThemeRed'
                                     }">
-                                        <i class="fa-regular fa-file-pdf text-white"
-                                        ></i>
+                                    <i class="fa-solid fa-envelope text-white pt-1"></i> <p class="text-white pl-1 "></p>
                                     </a>
+                                </span>
 
-
-                                    <span v-for="(profesor,index) in profesores">
-                                        <a type="button"  @click="showEnviar(profesor,horario.idProfesor)" class="p-3 rounded-md bg-[#dc2626] mx-2 inline-flex mb-1 mt-2"
-                                        v-if="$page.props.user.roles.includes('Recursos Humanos') && profesor.id==horario.idProfesor"
-                                        v-tippy="{
-                                            content:'Notificar a profesor',
-                                            placement: 'left' ,
-                                            arrow: true,
-                                            theme: 'MiThemeRed'
-                                        }">
-                                        <i class="fa-solid fa-envelope text-white pt-1"></i> <p class="text-white pl-1 "></p>
-                                        </a>
-                                    </span>
-
-                                <div>
-                                    <div :class="{ hidden: !isvisibleDelete }" v-bind:id="`Modal${horario.id}`" tabindex="-1" class="fixed inset-0 flex items-center justify-center z-50">
-                                        <div class="relative w-full max-w-md max-h-full">
-                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                <button @click="hideDelete" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
-                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                                    </svg>
-                                                    <span class="sr-only">Close modal</span>
-                                                </button>
-                                                <div class="p-6 text-center">
-                                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                                    </svg>
-                                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Esta seguro de eliminar este horario </h3>
-                                                    <Link @click="hideDelete" method="delete" :href="route('HorariosDocentes.destroy', idBorrarSeleccionado)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                                                        Si, estoy seguro
-                                                    </Link>
-                                                    <button @click="hideDelete" data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancelar</button>
-                                                </div>
+                            <div>
+                                <div :class="{ hidden: !isvisibleDelete }" v-bind:id="`Modal${horario.id}`" tabindex="-1" class="fixed inset-0 flex items-center justify-center z-50">
+                                    <div class="relative w-full max-w-md max-h-full">
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <button @click="hideDelete" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+                                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                </svg>
+                                                <span class="sr-only">Close modal</span>
+                                            </button>
+                                            <div class="p-6 text-center">
+                                                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                                </svg>
+                                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Esta seguro de eliminar este horario </h3>
+                                                <Link @click="hideDelete" method="delete" :href="route('HorariosDocentes.destroy', idBorrarSeleccionado)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                                    Si, estoy seguro
+                                                </Link>
+                                                <button @click="hideDelete" data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancelar</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div>
-                                    <div :class="{ hidden: !isVisibleCorreo }" v-bind:id="`Modal${horario.id}`" tabindex="-1" class="fixed inset-0 flex items-center justify-center z-50">
-                                        <div class="relative w-full max-w-md max-h-full">
-                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                <button @click="hideEnviar" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
-                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                                    </svg>
-                                                    <span class="sr-only">Close modal</span>
+                            <div>
+                                <div :class="{ hidden: !isVisibleCorreo }" v-bind:id="`Modal${horario.id}`" tabindex="-1" class="fixed inset-0 flex items-center justify-center z-50">
+                                    <div class="relative w-full max-w-md max-h-full">
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <button @click="hideEnviar" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+                                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                </svg>
+                                                <span class="sr-only">Close modal</span>
+                                            </button>
+                                            <div class="p-6 text-center">
+                                                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                                </svg>
+                                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Esta seguro de enviar un correo a
+                                                    {{  ProfesorCorreo.Nombre }} {{ ProfesorCorreo.ApellidoP }}  {{  ProfesorCorreo.ApellidoM }}  informando que su horario esta listo </h3>
+                                                <button @click="EnviarCorreo" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                                    Si, estoy seguro
                                                 </button>
-                                                <div class="p-6 text-center">
-                                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                                    </svg>
-                                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Esta seguro de enviar un correo a
-                                                        {{  ProfesorCorreo.Nombre }} {{ ProfesorCorreo.ApellidoP }}  {{  ProfesorCorreo.ApellidoM }}  informando que su horario esta listo </h3>
-                                                    <button @click="EnviarCorreo" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                                                        Si, estoy seguro
-                                                    </button>
-                                                    <button @click="hideEnviar" data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancelar</button>
-                                                </div>
+                                                <button @click="hideEnviar" data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancelar</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
-                                </div>
-
-
-                            </td>
-
-                        </tr>
-                    </tbody>
-
-                </table>
+                            </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <div v-if="horarios==''" class=" text-xl w-full mt-14 text-center"> <i class="fa-solid fa-magnifying-glass dark:text-white "></i>
-            <p class="pl-5 dark:text-white">Sin resultados para la busqueda</p>
+            <p class="pl-5 dark:text-white">Sin resultados</p>
         </div>
 
         <nav aria-label="Page navigation example mt-4" v-if="horarios!=''">
@@ -593,8 +583,6 @@ export default {
         this.Urls=this.$page.props.ListaUrl
         this.isVisible=false
         this.isvisibleConcentrado=false
-
-
 
         if(this.Paginator.next_page_url!=null){
             this.urlPaginacion = this.Paginator.next_page_url.slice(0, -1);

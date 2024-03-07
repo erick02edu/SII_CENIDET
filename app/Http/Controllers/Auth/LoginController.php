@@ -8,11 +8,9 @@ use Inertia\Inertia;
 
 class LoginController extends AuthenticatedSessionController
 {
-    // ...
 
     public function authenticate(Request $request)
     {
-
         $request->validate([
             'name' => 'required|string',
             'password' => 'required|string',
@@ -23,13 +21,9 @@ class LoginController extends AuthenticatedSessionController
         if (auth()->attempt($credentials)) {
             return redirect()->intended(config('fortify.home'));
         }
-
-
-        //return back()->withErrors(['name' => __('auth.failed')]);
         return inertia::render('Auth/Login',[
             'status'=>true
         ]);
     }
 
-    // ...
 }

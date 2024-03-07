@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('Materias',function(Blueprint $table){
             $table->id('id');
             $table->string('Nombre');
-            $table->string('Descripcion',70)->nullable();
+            $table->string('Descripcion',120)->nullable();
             $table->string('Codigo');
         });
     }

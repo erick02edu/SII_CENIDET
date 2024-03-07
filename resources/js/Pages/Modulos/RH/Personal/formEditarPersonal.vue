@@ -4,22 +4,18 @@
     <template #header class="pr-2">
             Modificar Personal
     </template>
+    <!--Seccion para modificar informacion del personal-->
     <div class="pl-2">
+        <!--Formulario oara editar la infromacion del personal-->
         <form @submit.prevent="EditarPersonal"  class="w-full ">
             <div class="flex flex-wrap -mx-3 mb-6 overflow-auto">
 
                 <div class="dark:text-gray-200 flex justify-between items-center ml-2 w-full mb-4 text-lg">
                     Datos Generales
-
-                    <div class="">
-                        <!-- <button @click="validarCURP" v-if="NuevoPersonal.CURP.length==18"  type="button"
-                        class="mr-2 text-white bg-[#487c9f] hover:bg-[#0284c7] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Obtener Informacion por curp
-                        </button> -->
-
+                    <div>
                         <button @click="validarCURP" v-if="NuevoPersonal.CURP.length==18"  type="button"
                         class="mr-2 text-white bg-[#487c9f] hover:bg-[#0284c7] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Obtener Informacion por curp
+                        Obtener Información por CURP
                         </button>
                     </div>
                 </div>
@@ -129,7 +125,7 @@
 
                 <div class="w-full md:w-1/2 px-3 ">
                     <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-last-name">
-                        Domicilio actual(calle y numero)
+                        Domicilio actual(calle y número)
                     </label>
                     <input id="Capacidad" v-model="NuevoPersonal.Direccion" class="appearance-none block w-full bg-white dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     type="text" placeholder="" required>
@@ -145,7 +141,7 @@
 
                 <div class="w-full md:w-1/2 px-3 ">
                     <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-last-name">
-                        Codigo Postal
+                        Código postal
                     </label>
                     <input id="Capacidad" maxlength="5" v-model="NuevoPersonal.CodigoPostal" class="appearance-none block w-full bg-white dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     type="text" placeholder="">
@@ -361,7 +357,7 @@
                 </div>
 
                 <div class="dark:text-gray-200 flex justify-between items-center ml-2 w-full mb-4 text-lg">
-                    Informacion Laboral
+                    Información Laboral
                 </div>
 
                 <div class="w-full md:w-1/5 px-3">
@@ -409,7 +405,7 @@
 
                 <div class="w-full md:w-1/5 px-3 mb-3">
                     <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-last-name">
-                        Numero de empleado
+                        Número de empleado
                     </label>
                     <input id="Capacidad" v-model="NuevoPersonal.numEmpleado" max="9999" class="appearance-none block w-full bg-white dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     type="number" placeholder="" required>
@@ -516,7 +512,7 @@
                     </label>
                     <select class="md:w-full appearance-none block w-full bg-white dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     name="aplicaciones" v-model="NuevoPersonal.idUsuario">
-
+                        <option :value="null">Sin cuenta</option>
                         <option :value="cuentaAsignada.id">
                             {{ cuentaAsignada.email }}
                         </option>
@@ -697,5 +693,3 @@
         }
     };
 </script>
-
-

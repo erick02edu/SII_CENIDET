@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="inline-flex ">
                                         <span>
-                                        <strong class="pl-4 pt-2 dark:text-gray-200">Marque los permisos que tendra este tipo de usuario</strong>
+                                        <strong class="pl-4 pt-2 dark:text-gray-200">Marque los permisos que tendrá este tipo de usuario</strong>
 
                                         <span class="dark:text-gray-200 text-xs ml-4">Seleccionar todos</span>
                                                 <input type="checkbox" v-model="isCheckad" @change="MarcarTotalPermisos" class="ml-1"/>
@@ -196,7 +196,7 @@
                                             <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                             </svg>
-                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Esta seguro de eliminar este tipo de usuario: {{ nameBorrarSeleccionado }} </h3>
+                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Está seguro de eliminar este tipo de usuario: {{ nameBorrarSeleccionado }} </h3>
                                             <Link @click="hideDelete" method="delete" :href="route('Roles.destroy', idBorrarSeleccionado)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                                 Si, estoy seguro
                                             </Link>
@@ -420,5 +420,4 @@
     .tippy-arrow[data-theme~='MyArrow'] {
         border-color: red;
     }
-
 </style>

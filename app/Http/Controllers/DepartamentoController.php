@@ -20,7 +20,9 @@ class DepartamentoController extends Controller
         $this->middleware(['role:Recursos Humanos'])->only('edit','update');
         $this->middleware(['role:Recursos Humanos'])->only('destroy');
     }
-    //Funcion que redirige a vista de departamentos
+    /*Funcion que redirige a vista con la lista de departamentos
+    Parametros recibidos:
+    1. Informacion para la creacion de un nuevo departamento*/
     public function index(){
         $Pagination=Departamentos::paginate(10);
         $departamentos=$Pagination->items();
@@ -38,7 +40,7 @@ class DepartamentoController extends Controller
             'tipoMensaje' => $TipoMensaje,
         ]);
     }
-    //Crear nuevo departamento
+    //Funcion que permite la creacion de un nuevo departamento
     public function store(Request $request)    {
         $Departamento=new Departamentos();
         try{
@@ -57,9 +59,9 @@ class DepartamentoController extends Controller
             Session::flash('TipoMensaje', 'Error');
             return redirect::route('Departamentos.index');
         }
-
     }
     //Funcion que redirige a vista para editar un departamento
+    //Parametros recibidos: id del departamento a editar
     public function edit(string $id)   {
         $Departamento = Departamentos::find($id);
         $personal=app(PersonalController::class)->ObtenerPersonalAlta();
@@ -83,7 +85,11 @@ class DepartamentoController extends Controller
             'tipoMensaje' => $TipoMensaje,
         ]);
     }
-    //Funcion que redirige a ruta para actualizar la informacion de un departamento
+    /*Funcion que permite actualizar la informacion de un departamento
+    Parametros recibidos:
+    1. id del departamento
+    2. Informacion actualizada del departamento
+    */
     public function update(Request $request, string $id)    {
         try{
             $Departamento=Departamentos::find($id);
@@ -98,7 +104,9 @@ class DepartamentoController extends Controller
             return redirect::route('Departamentos.index');
         }
     }
-    //Funcion que permite realizar la eliminacion de un departamento
+    /*  Funcion que permite realizar la eliminacion de un departamento
+    Parametros recibidos:
+    1.id del departamento a eliminar  */
     public function destroy(string $id){
         try{
             $Departamento = Departamentos::find($id);
@@ -114,17 +122,29 @@ class DepartamentoController extends Controller
             return redirect::route('Departamentos.index');
         }
     }
-    //Funcion que devuelv la lista de departamentos
+    //Funcion que devuelve la lista de departamentos completa
+    //Parametros recibidos: Sin parametros
     public function ObtenerDepartamentos(){
         $Departamentos=Departamentos::all();
         return $Departamentos;
     }
-    //Funcion que devuelve un departamento por medio de su id
+    /*Funcion que devuelve un departamento por medio de su id
+    Parametro recibido:
+        1.id del departamento buscado
+    Informacion devuelta:
+        1. Informacion del departamento buscado
+    */
     public function ObtenerDepartamentoPorID(String $id){
         $Departamento=Departamentos::find($id);
         return $Departamento;
     }
-    //Funcion que busca un departamento
+    /*Funcion que busca un departamento
+    Paraetros recibidos
+    1. Cadena de texto para realizar la busqueda del departamento
+    2. Campo de busqueda
+    Informacion devuelta
+    1.Lista de departamento encontrados en la busqueda
+    */
     public function buscarDepartamento(Request $request){
         $Departamento=$request->input('departamento');
         $campo = $request->input('campo');

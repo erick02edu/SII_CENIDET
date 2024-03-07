@@ -1,37 +1,26 @@
 <template>
     <div :class="$page.props.showingMobileMenu ? 'block' : 'hidden'" @click="$page.props.showingMobileMenu = false"
-         class="fixed inset-0 z-20 bg-[#014e8200] transition-opacity lg:hidden"></div>
+    class="fixed inset-0 z-20 bg-[#014e8200] transition-opacity lg:hidden"></div>
 
     <div :class="$page.props.showingMobileMenu ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
-         class="overflow-y-auto fixed inset-y-0 left-0 z-30 w-68 bg-[#014E82] dark:bg-slate-900 transition duration-300 transform lg:translate-x-0 lg:static lg:inset-0">
+    class="overflow-y-auto fixed inset-y-0 left-0 z-30 w-68 bg-[#014E82] dark:bg-slate-900 transition duration-300 transform lg:translate-x-0 lg:static lg:inset-0">
 
          <div class="flex ml-8 items-center mt-8 mb-6">
             <div class="flex items-center">
-                    <img src="/img/LogoTecNacional3.png" alt="Descripción de la imagen" class="w-30 h-20  ">
+                <img src="/img/LogoTecNacional3.png" alt="Descripción de la imagen" class="w-30 h-20  ">
             </div>
         </div>
 
         <nav class="mt-4" x-data="{ isMultiLevelMenuOpen: false }" >
-            <nav-link :href="route('dashboard')" :active="route().current('dashboard')"
-            >
+            <nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                 <template #icon>
-                    <!-- <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/>
-                    </svg> -->
                     <i class="fa-solid fa-house"></i>
                 </template>
                 Inicio
-
             </nav-link>
 
-
             <nav-link :href="route('Aplicaciones.index')" :active="route().current('Aplicaciones.index')"
-            v-if="$page.props.user.roles.includes('Administrador')"
-            >
+            v-if="$page.props.user.roles.includes('Administrador')" >
                 <template #icon>
                     <i class="fa-solid fa-clock"></i>
                 </template>
@@ -40,9 +29,7 @@
 
             <nav-link :href="route('Users.index')"
             :active="route().current('Users.index') || route().current('Users.edit') || route().current('Users.editRole') "
-            v-if="$page.props.user.roles.includes('Administrador')"
-            >
-
+            v-if="$page.props.user.roles.includes('Administrador')" >
                 <template #icon>
                     <i class="fa-solid fa-user"></i>
                 </template>
@@ -58,7 +45,6 @@
                 Tipo de Usuarios
 
             </nav-link>
-
 
             <nav-link :href="route('Avisos.index')" :active="route().current('Avisos.index')|| route().current('Avisos.edit')"
             v-if="$page.props.user.roles.includes('Administrador') "  >
@@ -77,15 +63,15 @@
                 Personal
             </nav-link>
 
-        <!-------- Version escuela---------------------------->
-            <!-- <nav-link :href="route('Personal.Reportes')" :active="route().current('Personal.Reportes') "
+
+            <nav-link :href="route('Personal.Reportes')" :active="route().current('Personal.Reportes') "
             v-if="$page.props.user.roles.includes('Recursos Humanos')" >
                 <template #icon>
                     <i class="fa-solid fa-person"></i>
                 </template>
                 Reportes
-            </nav-link> -->
-            <!----------------------------------------------------->
+            </nav-link>
+
 
             <nav-link :href="route('Plazas.index')" :active="route().current('Plazas.index') || route().current('Plazas.edit')"
             v-if="$page.props.user.roles.includes('Recursos Humanos') "
@@ -101,35 +87,32 @@
                 <template #icon>
                     <i class="fa-solid fa-briefcase"></i>
                 </template>
-                Categorias Plazas
+                Categoría Plazas
             </nav-link>
 
+            <nav-link :href="route('Alumnos.index')" :active="route().current('Alumnos.index') || route().current('Alumnos.edit')"
+            v-if="$page.props.user.roles.includes('Administrador')">
+                <template #icon>
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </template>
+                Alumnos
+            </nav-link>
 
-            <!----------VERSION ESCUELA ------------>
-                <!-- <nav-link :href="route('Alumnos.index')" :active="route().current('Alumnos.index') || route().current('Alumnos.edit')"
-                v-if="$page.props.user.roles.includes('Administrador')">
-                    <template #icon>
-                        <i class="fa-solid fa-book-open-reader"></i>
-                    </template>
-                    Alumnos
-                </nav-link>
+            <nav-link :href="route('Calificaciones.Promedios')" :active="route().current('Calificaciones.Promedios')"
+            v-if="$page.props.user.roles.includes('Administrador')">
+                <template #icon>
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </template>
+                Promedios
+            </nav-link>
 
-                <nav-link :href="route('Calificaciones.Promedios')" :active="route().current('Calificaciones.Promedios')"
-                v-if="$page.props.user.roles.includes('Administrador')">
-                    <template #icon>
-                        <i class="fa-solid fa-book-open-reader"></i>
-                    </template>
-                    Promedios
-                </nav-link>
-
-                <nav-link :href="route('Materias.index')" :active="route().current('Materias.index') || route().current('Materias.edit')"
-                v-if="$page.props.user.roles.includes('Administrador')">
-                    <template #icon>
-                        <i class="fa-solid fa-book"></i>
-                    </template>
-                        Materias
-                </nav-link> -->
-            <!-------------------------------------->
+            <nav-link :href="route('Materias.index')" :active="route().current('Materias.index') || route().current('Materias.edit')"
+            v-if="$page.props.user.roles.includes('Administrador')">
+                <template #icon>
+                    <i class="fa-solid fa-book"></i>
+                </template>
+                    Materias
+            </nav-link>
 
             <nav-link :href="route('HorariosDocentes.index')" :active="route().current('HorariosDocentes.index')"
             v-if="$page.props.user.roles.includes('Recursos Humanos')">
@@ -145,37 +128,35 @@
                 <template #icon>
                     <i class="fa-solid fa-building-user"></i>
                 </template>
-                Jefes
+                Departamentos
             </nav-link>
 
 
-             <!----------VERSION ESCUELA ------------>
-                <!-- <nav-link :href="route('Aulas.index')" :active="route().current('Aulas.index')"
-                v-if="$page.props.user.roles.includes('Administrador')">
-                    <template #icon>
-                        <i class="fa-solid fa-school"></i>
-                    </template>
-                    Aulas
-                </nav-link>
 
-                <nav-link :href="route('Grupos.index')" :active="route().current('Grupos.index')"
-                v-if="$page.props.user.roles.includes('Administrador')">
-                    <template #icon>
-                        <i class="fa-solid fa-people-group"></i>
-                    </template>
-                    Grupos
-                </nav-link>
+            <nav-link :href="route('Aulas.index')" :active="route().current('Aulas.index')"
+            v-if="$page.props.user.roles.includes('Administrador')">
+                <template #icon>
+                    <i class="fa-solid fa-school"></i>
+                </template>
+                Aulas
+            </nav-link>
+
+            <nav-link :href="route('Grupos.index')" :active="route().current('Grupos.index')"
+            v-if="$page.props.user.roles.includes('Administrador')">
+                <template #icon>
+                    <i class="fa-solid fa-people-group"></i>
+                </template>
+                Grupos
+            </nav-link>
 
 
-                <nav-link :href="route('Calificaciones.index')" :active="route().current('Calificaciones.index')"
-                v-if="$page.props.user.roles.includes('Administrador')">
-                    <template #icon>
-                        <i class="fa-solid fa-clipboard"></i>
-                    </template>
-                    Calificaciones
-                </nav-link> -->
-
-            <!----------------------------------------->
+            <nav-link :href="route('Calificaciones.index')" :active="route().current('Calificaciones.index')"
+            v-if="$page.props.user.roles.includes('Administrador')">
+                <template #icon>
+                    <i class="fa-solid fa-clipboard"></i>
+                </template>
+                Calificaciones
+            </nav-link>
 
 
             <nav-link :href="route('backup.index')" :active="route().current('backup.index')"
@@ -185,41 +166,27 @@
                 </template>
                 Respaldar Base
             </nav-link>
-
-
-
         </nav>
-
         <br>
     </div>
-
-
 </template>
 
 <script>
-import NavLink from '@/Components/NavLink.vue';
-import { Link } from '@inertiajs/vue3';
-import { ref } from 'vue'
 
-import axios from 'axios';
-
+    import NavLink from '@/Components/NavLink.vue';
+    import { Link } from '@inertiajs/vue3';
+    import { ref } from 'vue'
 
 export default {
 
-
-
-    //Objeto DATA
     data() {
         return {
-        items: [],
-        userID:this.$page.props.auth.user.id, // Obtiene el ID del usuario
-        ListaRoles:[],
-        Rol:"",
-        Permiso:"",
-        decision:"",
-
-
-        tooltipContent:'Soy el contenido'
+            items: [],
+            userID:this.$page.props.auth.user.id,
+            ListaRoles:[],
+            Rol:"",
+            Permiso:"",
+            decision:"",
         };
     },
 
@@ -230,22 +197,12 @@ export default {
 
     setup() {
         let showingTwoLevelMenu = ref(false)
-
         return {
             showingTwoLevelMenu
         }
     },
-
-    methods:{
-
-    },
-
-
-
 }
 </script>
-
-
 
 <style scoped>
 .max-h-64 {

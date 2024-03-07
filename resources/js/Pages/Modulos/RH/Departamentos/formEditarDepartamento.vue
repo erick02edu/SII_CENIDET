@@ -79,7 +79,6 @@
 </template>
 
 <script setup>
-
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
     import Pagination from '@/Components/Pagination.vue'
     import { Head, useForm } from '@inertiajs/vue3';
@@ -103,7 +102,6 @@
         idEncargado:props.JefeActual.id,
         idSubdireccion:props.departamento.idSubdireccion
     })
-
 </script>
 
 <script>

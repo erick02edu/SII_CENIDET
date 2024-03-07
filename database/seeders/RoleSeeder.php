@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -32,7 +32,6 @@ class RoleSeeder extends Seeder
         Role::create(['name'=>'Departamento de planeacion']);
         Role::create(['name'=>'Administrador']);
         Role::create(['name'=>'Secretarias CENIDET']);
-
 
 
         Permission::create(['name'=>'Modificación de Actas de Calificaciones']);

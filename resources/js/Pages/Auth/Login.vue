@@ -16,7 +16,7 @@ defineProps({
 });
 
 const form = useForm({
-    name: '',
+    email: '',
     password: '',
     remember: false,
 });
@@ -25,7 +25,7 @@ const submit = () => {
     form.transform(data => ({
         ...data,
         remember: form.remember ? 'on' : '',
-    })).post(route('loginUser'), {
+    })).post(route('login'), {
         onFinish: () => form.reset('password'),
     });
 };
@@ -41,7 +41,7 @@ const submit = () => {
 
             <form @submit.prevent="submit" class="py-20 px-10">
 
-                <p class="pt-10 pb-2 text-2xl">INICIAR SESION</p>
+                <p class="pt-10 pb-2 text-2xl uppercase">INICIAR Sesión</p>
 
                 <div v-if="status" class=" font-medium text-xs text-red-600 ">
                 Credenciales invalidas favor de revisar los datos ingresados
@@ -50,11 +50,11 @@ const submit = () => {
 
                 <div>
                     <i class="fa-solid fa-user pr-2"></i>
-                    <InputLabel for="text" value="Usuario"  />
+                    <InputLabel for="email" value="correo"  />
                     <TextInput
                         id="email"
-                        v-model="form.name"
-                        type="text"
+                        v-model="form.email"
+                        type="email"
                         class="mt-1 block w-full "
                         required
                         autofocus

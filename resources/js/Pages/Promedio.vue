@@ -1,5 +1,5 @@
 <template>
-    <Head title="Plazas" />
+    <Head title="Promedios" />
     <AuthenticatedLayout>
     <template #header>
             Promedios

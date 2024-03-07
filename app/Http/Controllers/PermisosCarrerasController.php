@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 
 class PermisosCarrerasController extends Controller
 {
-    //Obtener los permisos de carrera de un usuario
+    /*Obtener los permisos de carrera de un determinado usuario
+    Parametros recibidos:
+        1. id del usuario
+    Informacion devuelta:
+        1.Lista de carreras a las cuales tiene permiso
+    */
     public function ObtenerPermisosCarrera(String $id){
         $Carreras=PermisosCarreras::where('idUsuario',$id)->get();
         $ListaCarreras=[];
@@ -18,8 +23,12 @@ class PermisosCarrerasController extends Controller
         }
         return $ListaCarreras;
     }
-
-    //Funcion para asignar permisos de carreras
+    /*Funcion para asignar permisos de carreras
+    Parametros recibidos:
+    1. Carreras a asignar
+    2. id del usuario al que se le asignara
+    Informacion devuelta: Sin infromacion devuelta
+    */
     public function AsignarPermisos(Request $request){
         $CarrerasSeleccionadas=$request->input('CarrerasSelecionadas');
         $idUsuario=$request->input('idUsuario');
@@ -36,7 +45,11 @@ class PermisosCarrerasController extends Controller
             'tipoMensaje'=>'Exitoso'
         ]);
     }
-    //Funcion para eliminar un permiso de carrera
+    /*Funcion para eliminar un permiso de carrera
+    Parametros recibidos:
+        1.id del usuario
+        2.id de la carrera
+    */
     public function EliminarPermiso(Request $request){
         try{
             $idUsuario=$request->input('idUsuario');

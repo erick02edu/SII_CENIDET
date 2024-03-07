@@ -13,21 +13,18 @@ use Inertia\Inertia;
 class AvisosController extends Controller
 {
     //Constructor
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware(['role:Administrador'])->only('index');
         $this->middleware(['role:Administrador'])->only('store','create');
         $this->middleware(['role:Administrador'])->only('edit','update');
         $this->middleware(['role:Administrador'])->only('destroy');
     }
 
+    /* Funcion que retorna a la vista para la gestion de los avisos */
     public function index(){
-
         $Pagination=Avisos::paginate(10);
         $Avisos=$Pagination->items();
-
         $ListaUsuarios=app(UserController::class)->ObtenerUsuarios();
-
         // Obtener datos flash de la sesión
         $mensaje = Session::get('mensaje');
         $TipoMensaje = Session::get('TipoMensaje');
@@ -39,11 +36,10 @@ class AvisosController extends Controller
             'mensaje' => $mensaje,
             'tipoMensaje' => $TipoMensaje,
         ]);
-
     }
 
+    /* Funcion que redirige al formulario para la creacion de un nuevo aviso */
     public function create(){
-
         $ListaUsuarios=app(UserController::class)->ObtenerUsuarios();
         $ListaRoles=app(RoleController::class)->ObtenerRoles();
         return Inertia::render('Modulos/RH/Avisos/CrearAviso',[
@@ -53,9 +49,7 @@ class AvisosController extends Controller
     }
 
     public function store(Request $request){
-
         $Aviso=new Avisos();
-
         try{
             $Aviso->Titulo=$request->Titulo;
             $Aviso->Descripcion=$request->Descripcion;
@@ -68,22 +62,16 @@ class AvisosController extends Controller
 
             if(count($request->RolesSeleccionados)>0){
                 foreach($request->RolesSeleccionados as $Rol){
-
                     $ListaUsuarios=app(RoleController::class)->ObtenerUsuariosDeUnRol($Rol['id']);
-
                     // Convertir los arrays a colecciones
                     $usuariosEnviar = collect($usuariosEnviar);
                     $ListaUsuarios = collect($ListaUsuarios);
-
                     // Combinar las colecciones sin duplicados basados en la clave "id"
                     $usuariosEnviar = $usuariosEnviar->concat($ListaUsuarios)->unique('id');
-
                     // Convertir la colección combinada de nuevo a un array
                     $usuariosEnviar = $usuariosEnviar->values()->all();
-
                 }
             }
-
             $requestEnviar=new Request();
             $parametros=['ListaUsuario'=>$usuariosEnviar,'Aviso'=>$Aviso];
             $requestEnviar->merge($parametros);
@@ -93,10 +81,14 @@ class AvisosController extends Controller
             return Redirect::route('Avisos.index');
         }
         catch(Exception $e){
-
+            return Redirect::route('Avisos.index');
         }
     }
 
+    /* Funcion que redirige al formulario de edicion
+        Parametros recibidos
+        1. id del aviso a editar
+    */
     public function edit(String $id){
         $Aviso = Avisos::find($id);
         if($Aviso){
@@ -108,6 +100,11 @@ class AvisosController extends Controller
         }
     }
 
+    /* Funcion que actualiza la informacion correspondiente a un aviso
+        Parametros
+        1.Id del aviso a editar
+        2.Informacion actualiza del aviso
+     */
     public function update(String $id,Request $request){
         try{
             $Aviso=Avisos::find($id);
@@ -116,19 +113,21 @@ class AvisosController extends Controller
             Session::flash('mensaje', 'Se ha guardado los cambios realizados en el aviso');
             Session::flash('TipoMensaje', 'Exitoso');
             return redirect::route('Avisos.index');
-            }
-            catch(Exception $e){
-                Session::flash('mensaje', 'Ha ocurrido un error al intentar actualizar la informacion del aviso');
-                Session::flash('TipoMensaje', 'Error');
-                return redirect::route('Avisos.index');
-            }
+        }
+        catch(Exception $e){
+            Session::flash('mensaje', 'Ha ocurrido un error al intentar actualizar la informacion del aviso');
+            Session::flash('TipoMensaje', 'Error');
+            return redirect::route('Avisos.index');
+        }
     }
-
+    /* Funcion que elimina la informacion de un aviso
+        Parametors recibidos:
+        1.id del aviso a eliminar
+    */
     public function destroy(String $id){
         try{
             $Aviso = Avisos::find($id);
             $Aviso->delete();
-
             Session::flash('mensaje', 'Se ha eliminado correctamente el aviso');
             Session::flash('TipoMensaje', 'Exitoso');
 
@@ -140,17 +139,22 @@ class AvisosController extends Controller
         }
     }
 
+    /* Funcion que permite la busqueda de un aviso
+        Parametros recibidos
+        1. Cadena de texto realizada para la busqueda
+        2. Campo de busqueda
+        Informacion devuelta:
+        1. Lista de avisos obtenidos de la busqueda
+    */
     public function Buscar(Request $request){
         $Aviso=$request->input('Aviso');
-
         $campo = $request->input('campo');
-
         $result=Avisos::where($campo, 'LIKE', '%'.$Aviso.'%')->get();
-
         return $result;
     }
-
-    //Funcion que redirige a ruta donde se muestra la informacion del anuncio completo
+    /*Funcion que redirige a ruta donde se muestra la informacion del anuncio completo
+        Parametros recibidos: id de un aviso
+    */
     public function AnuncioCompleto(Request $request){
         $idAnuncio=$request->input('id');
         $Aviso=Avisos::find($idAnuncio);
@@ -158,6 +162,4 @@ class AvisosController extends Controller
             'aviso'=>$Aviso
         ]);
     }
-
-
 }

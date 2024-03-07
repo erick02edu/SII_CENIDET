@@ -4,11 +4,10 @@
     <template #header class="pr-2">
             Alta del Personal
     </template>
-
     <div class="pl-2">
+        <!--Fomrulario para dar de alta a un personal-->
         <form @submit.prevent="crearPersonal"  class="w-full ">
             <div class="flex flex-wrap -mx-3 mb-6 overflow-auto">
-
                 <div class="dark:text-gray-200 flex justify-between items-center ml-2 w-full mb-4 text-lg">
                     Datos Generales
                     <div>
@@ -134,7 +133,7 @@
 
                 <div class="w-full md:w-1/2 px-3 ">
                     <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-last-name">
-                        Domicilio actual(calle y numero)
+                        Domicilio actual(calle y número)
                     </label>
                     <input id="Capacidad" v-model="NuevoPersonal.Direccion" class="appearance-none block w-full bg-white dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     type="text" placeholder="" required>
@@ -150,7 +149,7 @@
 
                 <div class="w-full md:w-1/2 px-3 ">
                     <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-last-name">
-                        Codigo Postal (opcional)
+                        Código postal (opcional)
                     </label>
                     <input id="Capacidad" maxlength="5" v-model="NuevoPersonal.CodigoPostal" class="appearance-none block w-full bg-white dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     type="text" placeholder="">
@@ -174,7 +173,7 @@
 
                 <div class="w-full md:w-1/2 px-3">
                     <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-last-name">
-                        Telefono
+                        Teléfono
                     </label>
                     <input id="Capacidad" v-model="NuevoPersonal.Telefono" class="appearance-none block w-full bg-white dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     type="tel"
@@ -192,7 +191,7 @@
                 </div>
 
                 <div class="dark:text-gray-200 flex justify-between items-center ml-2 w-full mb-4 text-lg">
-                    Formacion academica
+                    Formación académica
                 </div>
 
                 <div class="w-full md:w-1/6 px-3">
@@ -369,7 +368,7 @@
                 </div>
 
                 <div class="dark:text-gray-200 flex justify-between items-center ml-2 w-full mb-4 text-lg">
-                    Informacion Laboral
+                    Información Laboral
                 </div>
 
                 <div class="w-full md:w-1/5 px-3">
@@ -389,7 +388,7 @@
 
                 <div class="w-full md:w-2/5 px-3">
                     <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2"  for="grid-last-name">
-                        Departamento de adscripcion
+                        Departamento de adscripción
                     </label>
                     <select class="md:w-full appearance-none block w-full bg-white dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="aplicaciones"
                     v-model="NuevoPersonal.idDepAdscripcion" required>
@@ -403,7 +402,7 @@
 
                 <div class="w-full md:w-2/5 px-3">
                     <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2"  for="grid-last-name">
-                        Departamento de Academico
+                        Departamento académico
                     </label>
                     <select class="md:w-full appearance-none block w-full bg-white dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="aplicaciones"
                     v-model="NuevoPersonal.idDepAcademico" required>
@@ -417,7 +416,7 @@
 
                 <div class="w-full md:w-1/5 px-3 mb-3">
                     <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-last-name">
-                        Numero de empleado
+                        Número de empleado
                     </label>
                     <input id="Capacidad" v-model="NuevoPersonal.numEmpleado" max="9999" class="appearance-none block w-full bg-white dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         type="number" placeholder="" required>
@@ -515,7 +514,8 @@
                     </select>
                 </div>
 
-                <div class="dark:text-gray-200 flex justify-between items-center ml-2 w-full mb-4 text-lg" v-if="NuevoPersonal.EstatusEmpleado==1">
+                <div class="dark:text-gray-200 flex justify-between items-center ml-2 w-full mb-4 text-lg"
+                v-if="NuevoPersonal.EstatusEmpleado==1">
                     Asignar cuenta
                 </div>
 
@@ -525,6 +525,7 @@
                     </label>
                     <select class="md:w-full appearance-none block w-full bg-white dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     name="aplicaciones" v-model="NuevoPersonal.idUsuario">
+                        <option :value="null">Sin cuenta</option>
                         <option v-for="usuario in usuarios"
                         :value="usuario.id"
                         >
@@ -548,7 +549,6 @@
         </form>
     </div>
     </AuthenticatedLayout>
-
 </template>
 
 <script setup>
@@ -559,10 +559,7 @@
 
 <script>
 
-import axios from 'axios';
-
 export default {
-
     components:{
         Link
     },
@@ -645,7 +642,6 @@ export default {
 
         }
     },
-
     methods: {
         //METODO PARA REALIZAR SOLICITUD A API CURP
         validarCURP(){
@@ -734,11 +730,3 @@ export default {
     }
 };
 </script>
-
-
-
-
-
-
-
-

@@ -15,14 +15,13 @@ use Illuminate\Support\Facades\Session;
 
 class AvisosUsuarioController extends Controller
 {
-
     //Constructor
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware(['role:Administrador'])->only('store');
     }
-
-    //Funcion que redirige a la ruta donde se muestran todos los avisos de un determinado usuario
+    /* Funcion que redirige a la ruta donde se muestran todos los avisos de un determinado usuario
+    Parametros recibidos: Sin parametros
+    */
     public function VerTodos(){
         $userId = Auth::id();
         $ListaAvisos = Avisos_Usuarios::where('idUsuario', $userId)
@@ -33,10 +32,12 @@ class AvisosUsuarioController extends Controller
             'avisos'=>$Avisos,
         ]);
     }
-
-    //Funcion que asigna un nuevo aviso a uno o varios usuario
+    /*Funcion que asigna un nuevo aviso a uno o varios usuario
+        Parametros recibidos
+        1. Id del aviso a asignar
+        2. Lista con los id del los usuarios a asignar el aviso
+    */
     public function store(Request $request){
-
         $Aviso=$request->input('Aviso');
         $ListaUsuarios=$request->input('ListaUsuario');
 
@@ -64,7 +65,10 @@ class AvisosUsuarioController extends Controller
             'avisos'=>$Avisos,
         ]);
     }
-    //Funcion que actualiza el campo leido
+    /*Funcion que actualiza el campo leido de un aviso
+    Parametros recibidos
+    1. id del aviso
+    */
     public function MarcarLeido(Request $request){
         //Obtener id del usuario autenticado
         $userId = Auth::id();

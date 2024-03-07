@@ -12,10 +12,18 @@ use Inertia\Inertia;
 
 class VigenciaPersonalController extends Controller
 {
+    /*Constructor */
     public function __construct(){
         $this->middleware(['role:Recursos Humanos'])->only('update','editVigencia','store');
     }
 
+    /*Funcion que oermite registrar la vigencia de un personal para un ciertpo periodo
+        Parametros recibidos
+        1. id del personal.
+        2.id del periodo
+        3. Fecha de inicio de la vigencia
+        4 Fecha de termino de la bigencia
+     */
     public function store(Request $request){
 
         try{
@@ -39,6 +47,11 @@ class VigenciaPersonalController extends Controller
         }
     }
 
+    /*Funcion que redirige a la vista para definir la vigencia de un personal para un determinado periodo
+    Parametros recibidos
+        1. id del personal.
+        2.id del periodo
+    */
     public function editVigencia(Request $request,String $idPersonal, String $idPeriodo){
         //Verificar que el personal y el periodo existan
         $ExistPeriodo=app(PeriodoController::class)->VerificarExistencia($idPeriodo);
@@ -77,6 +90,10 @@ class VigenciaPersonalController extends Controller
         }
     }
 
+    /* Funcion que actualiza el periodo de vigencia de un personal
+        1.id de la vigencia
+        2. request con la fecha de Incio y termino de la vigencia
+    */
     public function update(Request $request, string $id){
         try{
             $VigenciaPersonal=VigenciaPersonal::find($id);
@@ -92,6 +109,13 @@ class VigenciaPersonalController extends Controller
         }
     }
 
+    /* Funcion para obtener la fecha de inicio de la vigencia de un personal pora un determinado periodo
+        Parametros recibidos:
+        1. id del personal
+        2, id del periodo
+        Informacion devuelta
+        Fecha de Inicio de la vigencia
+    */
     public function ObtenerVigenciaInicio(String $idPersonal,String $idPeriodo){
         $VigenciaInicio=VigenciaPersonal::
         where('idPersonal',$idPersonal)->
@@ -101,6 +125,13 @@ class VigenciaPersonalController extends Controller
         return $VigenciaInicio;
     }
 
+    /* Funcion para obtener la fecha de termino de la vigencia de un personal pora un determinado periodo
+        Parametros recibidos:
+        1. id del personal
+        2, id del periodo
+        Informacion devuelta
+        Fecha de termino de la vigencia
+    */
     public function ObtenerVigenciaFin(String $idPersonal,String $idPeriodo){
         $VigenciaFin=VigenciaPersonal::
         where('idPersonal',$idPersonal)->
@@ -110,3 +141,4 @@ class VigenciaPersonalController extends Controller
         return $VigenciaFin;
     }
 }
+

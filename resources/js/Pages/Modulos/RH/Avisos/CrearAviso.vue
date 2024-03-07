@@ -41,7 +41,7 @@
             <div class="flex flex-wrap">
                 <span v-for="(User,index) in NuevoAviso.UsuariosSeleccionados"
                 class="bg-white mr-4 mb-2 dark:bg-slate-600 dark:text-white px-2 py-1 rounded-lg ">
-                {{ User.name }} <i class="fa-solid fa-xmark dark:text-white pl-1" @click="EliminarDestinatario(index)"></i>
+                {{ User.name }}-{{ User.email }} <i class="fa-solid fa-xmark dark:text-white pl-1" @click="EliminarDestinatario(index)"></i>
                 </span>
             </div>
         </div>
@@ -71,7 +71,6 @@
     <!-- Capa oscura -->
     <div :class="{ hidden: !isVisible }" class="fixed inset-0  bg-black opacity-50">
     </div>
-
     <!--Modal para definir los destinatarios-->
     <div id="modalContainer">
         <!-- Main modal -->
@@ -97,7 +96,7 @@
                             <div class="flex flex-wrap ">
 
                                 <label class=" w-full block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-first-name">
-                                    Seleccione los usuarios a los que se le enviara este aviso
+                                    Seleccione los usuarios a los que se le enviará este aviso
                                 </label>
 
                                 <div class="relative dark:text-white text-gray-700 focus-within:text-gray-700  dark:focus-within:text-slate-200 pb-3"

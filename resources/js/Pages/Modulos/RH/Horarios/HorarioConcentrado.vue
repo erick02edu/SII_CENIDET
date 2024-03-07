@@ -1,10 +1,11 @@
 <template>
     <Head title="Horario Concentrado PDF" />
+    <!--Imagen de carga al descargar PDF-->
     <div class='flex items-center justify-center min-h-screen'>
         <div style="border-top-color:transparent" class="w-8 h-8 border-4 border-[#014E82] rounded-full animate-spin"></div>
         <p class="ml-2">GENERANDO PDF ...</p>
     </div>
-
+    <!--Seccion con los horarios de los docentes-->
     <div v-show="true">
     <div id="pdfContent" >
     <div v-for="(horario,index) in ListaHorarios" :key="index" class="overflow:hidden page-break-before:always" >

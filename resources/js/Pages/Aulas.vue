@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="py-1 dark:bg-slate-700 dark:hover:bg-slate-500 " role="menuitem" tabindex="-1" id="dropdown-menu-item-2" href="#">
-                <span @click="SeleccionarCampo('Ubicacion','Ubicacion')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-slate-500 dark:text-gray-200">Ubicacion</span>
+                <span @click="SeleccionarCampo('Ubicacion','Ubicacion')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-slate-500 dark:text-gray-200">Ubicación</span>
                 </div>
 
             </div>
@@ -84,23 +84,32 @@
                             <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-last-name">
                                 Nombre del aula
                             </label>
-                            <input id="NombreAula" v-model="NuevaAula.NombreAula"  class="appearance-none block w-full bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"  type="text" placeholder="Aula 1">
+                            <input id="NombreAula" v-model="NuevaAula.NombreAula"
+                            class="appearance-none block w-full bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 border
+                            border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="text" placeholder="Aula 1" required>
                         </div>
 
                         <div class="w-full md:w-1/2 px-3">
                             <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-last-name">
                                 Capacidad
                             </label>
-                            <input id="Capacidad" v-model="NuevaAula.Capacidad" class="appearance-none block w-full bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"  type="number" placeholder="0">
+                            <input id="Capacidad" v-model="NuevaAula.Capacidad"
+                            class="appearance-none block w-full bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 border
+                            border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="number" placeholder="0" required>
                             </div>
                         </div>
 
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full px-3">
                                 <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-password">
-                                    Ubicacion
+                                    Ubicación
                                 </label>
-                                <input id="Ubicacion" v-model="NuevaAula.Ubicacion" class="appearance-none block w-full bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Ubicacion">
+                                <input id="Ubicacion" v-model="NuevaAula.Ubicacion"
+                                class="appearance-none block w-full bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 border
+                                border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                type="text" placeholder="Ubicacion" required>
 
                         </div>
                     </div>
@@ -145,7 +154,7 @@
                             Capacidad
                         </th>
                         <th class="border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
-                            Ubicacion
+                            Ubicación
                         </th>
                         <th class="border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200"
                         v-if="$page.props.user.roles.includes('Administrador')
@@ -177,12 +186,10 @@
                                 <i class="fa-solid fa-pen text-white"></i>
                             </Link>
 
-
                             <a type="button" @click="showDelete(aula.id)" class="p-3 rounded-md bg-[#dc2626] mx-2 inline-flex mb-1"
                             v-if="$page.props.user.roles.includes('Administrador')">
                                 <i class="fa-solid fa-trash text-white"></i>
                             </a>
-
                                     <div>
                                         <div :class="{ hidden: !isvisibleDelete }" v-bind:id="`Modal${aula.id}`" tabindex="-1" class="fixed inset-0 flex items-center justify-center z-50">
                                             <div class="relative w-full max-w-md max-h-full">
@@ -197,7 +204,7 @@
                                                         <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                                         </svg>
-                                                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Esta seguro de eliminar la Aula con id: {{ idBorrarSeleccionado }} </h3>
+                                                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Esta seguro de eliminar esta aula </h3>
                                                         <Link @click="hideDelete" method="delete" :href="route('Aulas.destroy', idBorrarSeleccionado)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                                             Si, estoy seguro
                                                         </Link>

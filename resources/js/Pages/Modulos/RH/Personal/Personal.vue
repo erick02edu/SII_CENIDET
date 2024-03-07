@@ -55,7 +55,9 @@
             v-if="$page.props.user.permissions.includes('Asignar cuentas de usuarios al personal')">
                 Asignar cuenta de usuario
             </button> -->
-            <Link :href="route('Personal.create')"  class="h-10 ml-3 rounded-md bg-[#014E82] px-6 py-2.5 mb-4 text-center text-sm text-white hover:bg-[#0284c7] "
+            <Link :href="route('Personal.create')"
+             class="h-10 ml-3 rounded-md bg-[#014E82] px-6 py-2.5 mb-4 text-center text-sm text-white
+             hover:bg-[#0284c7] "
             v-if="$page.props.user.roles.includes('Recursos Humanos')"
             v-tippy="{
                 content:'Agregar un nuevo personal',
@@ -67,7 +69,9 @@
                 Nuevo
             </Link>
 
-            <button :type="type" @click="VerificarPlaza()" class="h-10 ml-3 rounded-md bg-[#014E82] px-6 py-2.5 mb-4 text-center text-sm text-white hover:bg-[#0284c7]"  :class="{'ml-3 rounded-md bg-slate-500 opacity-30 px-6 py-2.5 mb-4 text-center text-sm text-gray-500 hover:bg-gray-300 cursor-not-allowed' : personalSeleccionado==0}" :disabled="personalSeleccionado==0"
+            <button :type="type" @click="VerificarPlaza()"
+            class="h-10 ml-3 rounded-md bg-[#014E82] px-6 py-2.5 mb-4 text-center text-sm text-white
+             hover:bg-[#0284c7]"  :class="{'ml-3 rounded-md bg-slate-500 opacity-30 px-6 py-2.5 mb-4 text-center text-sm text-gray-500 hover:bg-gray-300 cursor-not-allowed' : personalSeleccionado==0}" :disabled="personalSeleccionado==0"
             v-if="$page.props.user.roles.includes('Recursos Humanos')"
             v-tippy="{
                 content:'Agregar plaza al personal',

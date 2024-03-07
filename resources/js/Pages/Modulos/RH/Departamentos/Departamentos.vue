@@ -1,5 +1,4 @@
 <template>
-
     <Head title="Departamentos" />
     <AuthenticatedLayout>
         <template #header>

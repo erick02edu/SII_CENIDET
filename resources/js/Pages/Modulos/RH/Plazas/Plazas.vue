@@ -1,7 +1,6 @@
 <template>
     <Head title="Plazas" />
     <AuthenticatedLayout>
-
         <template #header>
                 Lista de Plazas
         </template>
@@ -117,7 +116,7 @@
                                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 
                                             <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-last-name">
-                                                Categoria de la plaza
+                                                Categoría de la plaza
                                             </label>
 
                                             <select class="md:w-6/7 appearance-none block w-full bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 border
@@ -243,7 +242,7 @@
                 <thead>
                     <tr class="border-b bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500" >
                         <th class="border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
-                            Descripcion Categoria
+                            Descripción categoría
                         </th>
                         <th class="border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
                             Diagonal
@@ -406,7 +405,6 @@
                 </li>
             </ul>
         </nav>
-
     </AuthenticatedLayout>
 </template>
 

@@ -4,13 +4,12 @@ use App\Http\Controllers\AlumnosController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\PDFController;
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\PlazaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\PromedioController;
+
 use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\AplicacionPeriodoController;
 use App\Http\Controllers\Auth\LoginController;
@@ -32,15 +31,7 @@ use App\Http\Controllers\PermisosCarrerasController;
 use App\Http\Controllers\VigenciaPersonalController;
 
 Route::get('/', function () {
-
     return redirect()->route('login');
-    // return Inertia::render('login', [
-    //     // 'canLogin' => Route::has('login'),
-    //     // 'canRegister' => Route::has('register'),
-    //     // 'laravelVersion' => Application::VERSION,
-    //     // 'phpVersion' => PHP_VERSION,
-    // ]);
-
 });
 
 Route::middleware([
@@ -147,6 +138,7 @@ Route::middleware([
             Route::get('Calificaciones.buscar',[CalificacionesController::class,'Buscar']);
             Route::get('Calificaciones.Promedios',[CalificacionesController::class,'Promedios'])->name('Calificaciones.Promedios');
             Route::post('Calificaciones.historial',[CalificacionesController::class,'GenerarHistorial'])->name('Calificaciones.historial');
+            Route::get('Calificaciones.Rendimiento',[CalificacionesController::class,'VerRendimiento']);
 
             //Rutas para crud Grupos
             Route::resource('Grupos',GruposController::class);
@@ -172,9 +164,6 @@ Route::middleware([
             Route::resource('Aulas',AulaController::class);
             Route::get('Aula.buscar',[AulaController::class,'Buscar']);
 
-            //Promedio
-            Route::get('Promedios',[PromedioController::class,'index'])->name('Promedio.index');
-
             //Rutas para respaldo
             Route::resource('backup',BackupController::class)->only(['index']);
             Route::get('GenerarBackup',[BackupController::class,'GenerarBackup'])->name('GenerarBackup');
@@ -182,22 +171,4 @@ Route::middleware([
             Route::post('EliminarRespaldo',[BackupController::class,'EliminarRespaldo'])->name('EliminarRespaldo');
             Route::get('/descargar-archivo/{nombreArchivo}', [BackupController::class,'descargarSQL'])->name('descargar-archivo');
  });
-
-//Login
-Route::post('/login', [LoginController::class, 'authenticate'])->name('loginUser');
-
-
-/*------------------------Rutas de prueba--------------------------------------------------------------------*/
-Route::get('/reporte', function () {
-    //return view('Reportes.Horarios');
-    return view('Reportes.HorarioPDF');
-});
-
-Route::get('/AvisoEmail', function () {
-    //return view('Reportes.Horarios');
-    //return view('emails.NuevoAviso');
-    return view('emails.NotificacionHorario');
-});
-
-Route::get('PruebaReporte',[PDFController::class,'generatePDF'])->name('PruebaReporte');
 

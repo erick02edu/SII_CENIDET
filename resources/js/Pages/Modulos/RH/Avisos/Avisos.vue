@@ -1,11 +1,9 @@
 <template>
-
     <Head title="Avisos" />
     <AuthenticatedLayout>
     <template #header>
             Avisos
     </template>
-
     <!--Seccion de buscador-->
     <div class="inline-flex w-full" >
         <!--Barra de busqueda-->
@@ -32,7 +30,7 @@
         <div v-if="MostrarFiltro" class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu-button" tabindex="-1">
 
             <div class="py-1 dark:bg-slate-700 dark:hover:bg-slate-500 " role="menuitem" tabindex="-1" id="dropdown-menu-item-1" href="#">
-            <span @click="SeleccionarCampo('Titulo','Titulo')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-slate-500 dark:text-gray-200">Titulo</span>
+            <span @click="SeleccionarCampo('Titulo','Título')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-slate-500 dark:text-gray-200">Título</span>
             </div>
         </div>
         </div>
@@ -65,10 +63,10 @@
             <thead>
                 <tr class="border-b bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                     <th class=" w-2/5 border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
-                        Titulo del aviso
+                        Título del aviso
                     </th>
                     <th class="w-2/5 border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
-                        Fecha de publicacion
+                        Fecha de publicación
                     </th>
 
                     <th v-if="$page.props.user.roles.includes('Administrador')"
@@ -128,7 +126,7 @@
                                             <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                             </svg>
-                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Esta seguro de eliminar este aviso </h3>
+                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Está seguro de eliminar este aviso </h3>
                                             <Link @click="hideDelete" method="delete" :href="route('Avisos.destroy', idBorrarSeleccionado)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                                 Si, estoy seguro
                                             </Link>
@@ -183,7 +181,6 @@
             </li>
         </ul>
     </nav>
-
     </AuthenticatedLayout>
 </template>
 
@@ -254,7 +251,7 @@ export default {
       isvisibleDelete:false,
 
       campoBusqueda:'Titulo',
-      campoBusquedaVer:'Titulo',
+      campoBusquedaVer:'Título',
 
       AvisoBuscar:'',
       setTimeoutBuscador:'',
@@ -353,8 +350,4 @@ export default {
     .tippy-arrow[data-theme~='MyArrow'] {
         border-color: red;
     }
-
-
 </style>
-
-

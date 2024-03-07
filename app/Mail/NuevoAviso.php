@@ -13,10 +13,6 @@ class NuevoAviso extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-
     public $Titulo;
 
     public function __construct(String $Titulo)

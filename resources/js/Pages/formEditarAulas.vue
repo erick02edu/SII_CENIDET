@@ -20,7 +20,7 @@
                             id="NombreAula"
                             v-model="InfoEditar.NombreAula"
                             class="py-2 px-3 rounded-lg border-2 border-[#0285c7c6] dark:text-gray-200 dark:bg-slate-700 mt-1 focus:outline-none focus:ring-2 focus:[#014E82] focus:border-transparent" type="text"
-                        />
+                            required />
                         </div>
                         <div class="grid grid-cols-1">
                         <label class="uppercase md:text-sm text-xs text-gray-500 dark:text-gray-200 text-light font-semibold">Capacidad</label>
@@ -28,16 +28,16 @@
                             id="Capacidad"
                             v-model="InfoEditar.Capacidad"
                             class="py-2 px-3 rounded-lg border-2 border-[#0285c7c6] dark:text-gray-200 dark:bg-slate-700 mt-1 focus:outline-none focus:ring-2 focus:[#014E82] focus:border-transparent" type="number"
-                        />
+                            required />
                         </div>
 
                         <div class="grid grid-cols-1">
-                        <label class="uppercase md:text-sm text-xs text-gray-500 dark:text-gray-200 text-light font-semibold">Ubicacion</label>
+                        <label class="uppercase md:text-sm text-xs text-gray-500 dark:text-gray-200 text-light font-semibold">Ubicación</label>
                         <input
                             id="Ubicacion"
                             v-model="InfoEditar.Ubicacion"
                             class="py-2 px-3 rounded-lg border-2 border-[#0285c7c6] dark:text-gray-200 dark:bg-slate-700 mt-1 focus:outline-none focus:ring-2 focus:[#014E82] focus:border-transparent" type="text"
-                        />
+                            required />
                         </div>
 
 

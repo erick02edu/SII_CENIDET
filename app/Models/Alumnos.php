@@ -13,6 +13,6 @@ class Alumnos extends Model
     protected $dates = [
         'FechaNac',
     ];
-    protected $fillable=["Nombre","ApellidoP","ApellidoM","FechaNac","noControl","curp","Direccion","Genero","Telefono","idGrupo"];
+    protected $fillable=["Nombre","ApellidoP","ApellidoM","FechaNac","noControl","curp","Direccion","Genero","Telefono","idGrupo",'idCarrera'];
 
 }

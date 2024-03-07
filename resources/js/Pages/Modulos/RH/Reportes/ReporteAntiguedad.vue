@@ -1,20 +1,17 @@
 <template>
-
-
-    <!-- <div class='flex items-center justify-center min-h-screen'>
+    <!--Imagen de carga al descargar PDF-->
+    <div class='flex items-center justify-center min-h-screen'>
         <div style="border-top-color:transparent" class="w-8 h-8 border-4 border-[#014E82] rounded-full animate-spin"></div>
         <p class="ml-2">GENERANDO REPORTE...</p>
-    </div> -->
-
-    <!-- <div v-show="true"> -->
+    </div>
+    <!--Seccion con el reporte de antiguedad-->
+    <div v-show="true">
         <div id="pdfContent" class="w-full h-auto overflow-y-auto">
-
             <!--Encabezado con logos-->
             <div class="w-full h-14 inline-flex align-top mb-3">
                 <div class="w-1/3 flex justify-start align-top pl-10 ">
                     <img src="/img/LogoSEP.jpg" class="h-14">
                 </div>
-
 
                 <div class="w-1/3 flex justify-center">
                     <img src="/img/LogoTecReportes.png" class="h-14">
@@ -25,15 +22,13 @@
                 </div>
             </div>
 
+            <!--Contenido-->
             <div v-for="(Rango,index) in InformacionRango">
-
-
                 <div class="w-full inline-flex align-top  text-xl  mt-5 ">
                     <span>
                         <strong class=" ml-10 ">Informacion del rango antiguedad: </strong>{{Rango.NombreRango}}
                     </span>
                 </div>
-
                 <!-- Renderiza la gráfica en un elemento HTML -->
                 <div class="w-full inline-flex align-top">
 
@@ -48,7 +43,6 @@
                     </div>
 
                     <div class="w-2/5 text-sm ">
-
                         <br><br>
                         <strong>Informacion general</strong><br><br>
 
@@ -62,17 +56,10 @@
                                 menos
                             </span>
                             de {{ Rango.Años }} años
-
                         </p>
+
                         <div class="inline-flex mb-5 mt-2 w-full items-center text-xs ">
-
-
-
-
-                            <div class="p-2 m-1 bg-[#014E82]">
-
-                            </div>
-
+                            <div class="p-2 m-1 bg-[#014E82]"></div>
                             <div class="pb-1">
                                 <span>Porcentaje de personal {{ Rango.NombreRango }}:{{ Rango.PorcentajeEmpleados }}%</span>
                             </div>
@@ -80,14 +67,12 @@
                             <div class="pb-1 ml-4">
                                 <span>Numero de personas con esta antiguedad: {{ Rango.NumPersonas }}</span>
                             </div>
-
                         </div>
                     </div>
 
                 </div>
 
                 <div v-if="HacerEspaciado(index+1)">
-
                     <!--Encabezado con logos-->
                     <div class="w-full h-14 inline-flex align-top mb-3 mt-28 ">
                         <div class="w-1/3 flex justify-start align-top pl-10 ">
@@ -103,24 +88,17 @@
                             <img src="/img/CenidetLogoClaro.png" class="h-14">
                         </div>
                     </div>
-
                 </div>
-
             </div>
             <br><br>
-
         </div>
-    <!-- </div> -->
-
+    </div>
 </template>
 
 
 <script>
     import html2pdf from "html2pdf.js";
-
-
     import { Chart, ArcElement, Tooltip, Legend } from 'chart.js/auto';
-    //Chart.register(PieElement, Tooltip, Legend);
     Chart.register(ArcElement, Tooltip, Legend)
 
     export default {
@@ -177,22 +155,13 @@
                 var tiempoRenderizar=200*this.$page.props.InformacionRango.length
             }
             this.nombreArchivo="ReporteAntiguedad";
-
             await this.renderChart();
-
-
-
             setTimeout(() => {
                 this.generarPDF();
             }, tiempoRenderizar); // Adjust the delay as needed
-
-
-
         },
 
         methods:{
-
-
             HacerEspaciado(index){
                 return index % 3 === 0;
             },
@@ -223,7 +192,6 @@
                 }
             },
 
-
             async generarPDF() {
                 const element = document.getElementById("pdfContent");
                 const pdfOptions = {
@@ -236,7 +204,7 @@
 
                 const pdf = new html2pdf().from(element).set(pdfOptions);
                 pdf.save();
-                //window.history.back();
+                window.history.back();
             },
 
         }

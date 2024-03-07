@@ -90,7 +90,7 @@
 
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label class="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-xs font-bold mb-2" for="grid-first-name">
-                                Numero de Semestre
+                                Número de Semestre
                             </label>
                             <input id="Nombre" v-model="NuevoGrupo.Semestre"  class="appearance-none block w-full bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             type="number" placeholder="nombre" required>
@@ -161,9 +161,7 @@
                 <!--Encabezados-->
                 <thead>
                     <tr class="border-b bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
-                        <th class="border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
-                            ID
-                        </th>
+
                         <th class="border-b-2 border-gray-300 dark:border-slate-700 bg-gray-300 dark:bg-slate-700 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-slate-200">
                             Semestre
                         </th>
@@ -188,10 +186,6 @@
                 <!--FILAS-->
                 <tbody>
                     <tr v-for="grupo in grupos" :key="grupo.id" class="text-gray-700">
-
-                        <td class="border-b border-gray-200 dark:border-slate-700  bg-white dark:bg-slate-800 px-5 py-5 text-sm">
-                            <p class="text-gray-900 dark:text-gray-200 whitespace-no-wrap">{{ grupo.id }}</p>
-                        </td>
 
                         <td class="border-b border-gray-200 dark:border-slate-700  bg-white dark:bg-slate-800 px-5 py-5 text-sm">
                             <p class="text-gray-900 dark:text-gray-200 whitespace-no-wrap">{{ grupo.Semestre }}</p>

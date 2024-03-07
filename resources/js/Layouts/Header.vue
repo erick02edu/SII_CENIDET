@@ -40,12 +40,11 @@
                 </template>
 
                 <template #content>
-                    <dropdown-link :href="route('profile.show')">
+                    <!-- <dropdown-link :href="route('profile.show')">
                         Perfil
-                    </dropdown-link>
-
+                    </dropdown-link> -->
                     <dropdown-link class="w-full text-left" :href="route('logout')" method="post" as="button">
-                        Cerrar Sesion
+                        Cerrar sesión
                     </dropdown-link>
                 </template>
             </dropdown>
@@ -54,15 +53,13 @@
 </template>
 
 <script setup>
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
+    import Dropdown from '@/Components/Dropdown.vue';
+    import DropdownLink from '@/Components/DropdownLink.vue';
 </script>
 
 <script>
     import { useDark,useToggle} from '@vueuse/core'
     import { directive } from 'vue-tippy'
-    import { roundArrow } from 'vue-tippy'
-    import { ref } from 'vue'
 
     const isDark=useDark()
     const toggleDark=useToggle(isDark)
@@ -122,6 +119,5 @@ import DropdownLink from '@/Components/DropdownLink.vue';
         font-size: 15px;
         padding: 5px;
     }
-
 </style>
 

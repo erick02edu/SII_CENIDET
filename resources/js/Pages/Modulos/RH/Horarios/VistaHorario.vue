@@ -820,15 +820,9 @@
                     <br>
                     <strong>Rev.O</strong>
                 </div>
-
-
-
-            </div>
-            <!--ESPACIADO PARA LA SIGUIENTE PAGINA PONER EN 8 O 10-->
-            <!-- <div class="mt-8">
-            </div> -->
             </div>
         </div>
+    </div>
     </template>
 
     <script setup>

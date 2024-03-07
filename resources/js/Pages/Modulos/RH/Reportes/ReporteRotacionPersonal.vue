@@ -1,6 +1,8 @@
 <template>
 
 <div class="overflow-hidden w-full max-h-screen">
+    
+    <!--Imagen de carga al descargar PDF-->
     <div class='flex items-center justify-center min-h-screen
     overflow-hidden'>
         <div style="border-top-color:transparent"
@@ -9,31 +11,28 @@
         <p class="ml-2">GENERANDO REPORTE...</p>
     </div>
 
+    <!--Cantenido del reporte-->
     <div class="overflow-hidden ">
         <div id="pdfContent" class="w-full h-auto overflow-y-hidden">
-
             <!--Encabezado con logos-->
             <div class="w-full h-14 inline-flex align-top mb-3">
                 <div class="w-1/3 flex justify-start align-top pl-10 ">
                     <img src="/img/LogoSEP.jpg" class="h-14">
                 </div>
-
-
                 <div class="w-1/3 flex justify-center">
                     <img src="/img/LogoTecReportes.png" class="h-14">
                 </div>
-
                 <div class="w-1/3 flex justify-end mr-10 ">
                     <img src="/img/CenidetLogoClaro.png" class="h-14">
                 </div>
             </div>
 
+            <!--------------------Seccion de Contrataciones----------------------------------------------------------------------------------------->
             <div class="w-full inline-flex align-top  text-xl  mt-5 ">
                 <span>
                     <strong class=" ml-10 ">Contrataciones </strong>  realizadas entre las fechas {{ FechaInicio }} y {{ FechaFin }}
                 </span>
             </div>
-
             <!-- Renderiza la gráfica en un elemento HTML -->
             <div class="w-full inline-flex align-top">
 
@@ -48,90 +47,63 @@
                 </div>
 
                 <div class="w-2/5 text-sm ">
-
                     <br><br>
                     <strong>Informacion general</strong><br><br>
 
                     <div class="inline-flex mb-5 mt-2 w-full items-center text-xs ">
-                        <div class="p-2 m-1 bg-[#41B883]">
-
-                        </div>
-
+                        <div class="p-2 m-1 bg-[#41B883]"> </div>
                         <div class="pb-1">
                             <span>Porcentaje de hombres contratados:{{ porcentajeHombres }}%</span>
-
                         </div>
                             <span class="ml-5">Total de hombres:{{ totalHombres }}</span>
                         <br><br>
                     </div>
 
                     <div class="inline-flex mb-10 w-full items-center text-xs">
-                        <div class="p-2 m-1 bg-[#E46651]">
-
-                        </div>
-
+                        <div class="p-2 m-1 bg-[#E46651]"></div>
                         <div class="pb-1">
                             <span>Porcentaje de mujeres contratadas:{{ porcentajeMujeres }}%</span>
-
                         </div>
                         <span class="ml-5">Total de mujeres:{{ totalMujeres }}</span>
-
                         <br><br>
                     </div>
-
                 </div>
-
             </div>
-
             <br><br>
-
-            <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-
+            <!--------------------Seccion de bajas----------------------------------------------------------------------------------------->
             <div class="w-full inline-flex  text-xl mt-1">
-
                 <span>
                     <strong class=" ml-12 ">Bajas </strong>  realizadas entre las fechas {{ FechaInicio }} y {{ FechaFin }}
                 </span>
-
             </div>
             <!-- Renderiza la gráfica en un elemento HTML -->
             <div class="w-full inline-flex align-top">
 
-                    <div class="w-1/3 flex justify-center items-center mr-3  ml-28  ">
-                        <div class="text-start align-top ">
-                            <div class=" text-start text-xs">
-                                <canvas id="myChart2" class="w-64   mt-4 mr-28 ">
-                                </canvas>
+                <div class="w-1/3 flex justify-center items-center mr-3  ml-28  ">
+                    <div class="text-start align-top ">
+                        <div class=" text-start text-xs">
+                            <canvas id="myChart2" class="w-64   mt-4 mr-28 ">
+                            </canvas>
 
-                            </div>
                         </div>
                     </div>
-
+                </div>
                 <div class="w-2/5 text-sm h-auto">
-
                     <br><br>
                     <strong>Informacion general</strong><br><br>
-
                     <div class="inline-flex mb-3 mt-2 w-full h-auto items-center text-xs " v-for="(porcentaje,index) in porcentajesBajas">
                         <div class="p-2 m-1" :style="{ backgroundColor: ListaColores[index] }" >
 
                         </div>
-
                         <div class="pb-4">
                             <span>Porcentaje de bajas por {{ ListaNombreEstatus[index] }}: {{porcentaje}} %</span>
-
                         </div>
-
-
                     </div>
-
-
-
                 </div>
-
             </div>
         </div>
     </div>
+
 </div>
 </template>
 
@@ -196,25 +168,16 @@
             ListaNombreEstatus:Array,
             porcentajesBajas:Array
         },
-
         async mounted() {
-
             this.nombreArchivo="RotacionPersonal_"+this.$page.props.FechaInicio+"_"+this.$page.props.FechaFin;
-
             await this.renderChart();
-
             setTimeout(() => {
                 this.generarPDF();
             }, 900); // Adjust the delay as needed
-
-
-
         },
-
         methods:{
 
             async renderChart() {
-
                 //---------------------------Grafica contrataciones--------------------------------------------------------
                     const ctx = document.getElementById("myChart").getContext("2d");
                     const data={
@@ -246,18 +209,12 @@
                             }
                         ]
                     }
-
                     await new Chart(
                     ctx2, {
                         type: "pie",
                         data: data2,
                     });
-
-
-
             },
-
-
             async generarPDF() {
                 const element = document.getElementById("pdfContent");
                 const pdfOptions = {
@@ -272,8 +229,6 @@
                 pdf.save();
                 window.history.back();
             },
-
         }
-
     }
 </script>

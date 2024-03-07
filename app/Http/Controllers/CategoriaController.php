@@ -19,6 +19,7 @@ class CategoriaController extends Controller
         $this->middleware(['role:Recursos Humanos'])->only('destroy');
     }
 
+    /*Funcion que redirige a vista donde se editan las categorias */
     public function index(){
         $Pagination=categoria::paginate(10);
         $categorias=$Pagination->items();
@@ -35,6 +36,10 @@ class CategoriaController extends Controller
 
     }
 
+    /* Funcion que permite registrar una nueva categoria
+    Parametros recibidos
+    1. Informacion de la nueva categoria
+    */
     public function store(Request $request){
         $categoria=new categoria();
         try{
@@ -54,6 +59,10 @@ class CategoriaController extends Controller
         }
     }
 
+    /* Funcion que redirige al formulario para la edicion de una ctaegoria
+    Parametros recibidos:
+    1.id de la categoria a editar
+    */
     public function edit(String $id){
 
         $Categoria = categoria::find($id);
@@ -66,6 +75,11 @@ class CategoriaController extends Controller
         }
     }
 
+    /* Funcion que permite actualizar la informacion de una categoria
+    Parametros recibidos
+    1.id de la categoria
+    2. Informacion actualizada de la categoria
+    */
     public function update(String $id,Request $request){
         try{
 
@@ -83,6 +97,11 @@ class CategoriaController extends Controller
 
     }
 
+    /*
+    Funcion que permite la eliminacion de una categoria
+    Parametros recibidos
+    1. id de la categoria a eliminar
+     */
     public function destroy(String $id){
         try{
             $Categoria = categoria::find($id);
@@ -97,16 +116,29 @@ class CategoriaController extends Controller
         }
     }
 
+    //Funcion que permite obtener la lista de categorias
+    //Paramtros recibidos: Sin parametros
+    //Informacion devuelta: Lista completa de las categorias
     public function ObtenerCategorias(){
         $categorias=categoria::all();
         return $categorias;
     }
 
+    //Funcion que permite obtener la informacion de una categoria por medio de su id
+    //Parametros recibidos: id de la categoria
+    //Informacion que devuelve: Informacion de la categoria obtenida
     public function ObtenerCategoriaPorID(String $id) {
         $categoria=categoria::find($id);
         return $categoria;
     }
 
+    /*Funcion que permite buscar una categoria
+    Parametros recibidos
+    1. Cdena de texto utilizada para la busqueda
+    2. Campo por el que se realizara la busqueda
+    Informacion devuelta:
+    Lista de categorias obtenidas de la busqueda
+    */
     public function buscar(Request $request){
         $Categoria=$request->input('categoria');
         $campo = $request->input('campo');

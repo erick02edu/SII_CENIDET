@@ -111,8 +111,7 @@
                                 </Link>
                                 <button
                                 type="submit"
-                                class='w-auto bg-[#014E82] hover:bg-[#0284c7] rounded-lg shadow-xl font-medium text-white px-4 py-2'
-                                >
+                                class='w-auto bg-[#014E82] hover:bg-[#0284c7] rounded-lg shadow-xl font-medium text-white px-4 py-2' >
                                 Cambiar el tipo de usuario
                                 </button>
                             </div>
