@@ -93,7 +93,7 @@
                                 Número de Semestre
                             </label>
                             <input id="Nombre" v-model="NuevoGrupo.Semestre"  class="appearance-none block w-full bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                            type="number" placeholder="nombre" required>
+                            type="number" placeholder="0" required>
                         </div>
 
                         <div class="w-full md:w-1/2 px-3">
@@ -101,7 +101,7 @@
                                 Especialidad
                             </label>
                             <input id="email" v-model="NuevoGrupo.Especialidad" class="appearance-none block w-full bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                            type="text" placeholder="email" required>
+                            type="text" placeholder="Especialidad" required>
                         </div>
 
                         <div class="w-1/2 px-3">
@@ -109,7 +109,7 @@
                                     Letra del Grupo
                                 </label>
                                 <input id="text" v-model="NuevoGrupo.Letra" class="appearance-none block w-full bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 border border-gray-200  dark:border-slate-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                type="text" placeholder="contraseña" required>
+                                type="text" placeholder="Letra" required>
                         </div>
 
                         <div class="w-1/2 px-3">

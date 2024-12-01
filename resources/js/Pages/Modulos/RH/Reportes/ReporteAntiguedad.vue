@@ -26,7 +26,7 @@
             <div v-for="(Rango,index) in InformacionRango">
                 <div class="w-full inline-flex align-top  text-xl  mt-5 ">
                     <span>
-                        <strong class=" ml-10 ">Informacion del rango antiguedad: </strong>{{Rango.NombreRango}}
+                        <strong class=" ml-10 ">Información del rango antiguedad: </strong>{{Rango.NombreRango}}
                     </span>
                 </div>
                 <!-- Renderiza la gráfica en un elemento HTML -->
@@ -44,12 +44,12 @@
 
                     <div class="w-2/5 text-sm ">
                         <br><br>
-                        <strong>Informacion general</strong><br><br>
+                        <strong>Información general</strong><br><br>
 
                         <p class="text-xs">Personal {{ Rango.NombreRango }}:
                             Personal con
                             <span v-if="Rango.Operador=='Mas'">
-                                mas
+                                más
                             </span>
 
                             <span v-if="Rango.Operador=='Menos'">
@@ -65,7 +65,7 @@
                             </div>
 
                             <div class="pb-1 ml-4">
-                                <span>Numero de personas con esta antiguedad: {{ Rango.NumPersonas }}</span>
+                                <span>Número de personas con esta antigüedad: {{ Rango.NumPersonas }}</span>
                             </div>
                         </div>
                     </div>
